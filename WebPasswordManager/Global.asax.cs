@@ -14,7 +14,7 @@ namespace WebPasswordManager
         {
             AreaRegistration.RegisterAllAreas();
             RouteConfig.RegisterRoutes(RouteTable.Routes);
-            //SetSecurityFile("password123");
+            SetSecurityFile("password123");
         }
 
         protected void SetSecurityFile(string password)
@@ -24,7 +24,7 @@ namespace WebPasswordManager
             string hash = crypto.Compute(password, salt);
 
             string path = Server.MapPath("~/App_Data/Security.txt");
-            File.WriteAllLines(password, new[] { salt, hash });
+            File.WriteAllLines(path, new[] { salt, hash });
         }
     }
 }
