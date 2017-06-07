@@ -16,8 +16,8 @@ namespace WebPasswordManager
         {
             AreaRegistration.RegisterAllAreas();
             RouteConfig.RegisterRoutes(RouteTable.Routes);
+
             Repositories.SqlitePasswordManager.Init();
-            //SetSecurityFile("password123");
         }
 
         protected void SetSecurityFile(string password)
