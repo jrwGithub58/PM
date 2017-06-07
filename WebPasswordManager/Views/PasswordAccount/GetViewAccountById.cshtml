@@ -1,24 +1,14 @@
 ﻿@model WebPasswordManager.Models.PasswordAccount
 @{
-    Layout = null;
+
 }
 
-<!DOCTYPE html>
-
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title>GetViewAccountById</title>
-</head>
-<body>
-    <div> 
-       <dl>
-           <dt>Account Name:  @Model.AccountName </dt>
-           <dt>Url: @Model.Url</dt>
-           <dt>User Name: @Model.UserName</dt>
-           <dt>Password: @Model.Password</dt>
-           <dt>Account Owner: @Model.AccountOwner</dt>
-       </dl>
-    </div>
-</body>
-</html>
+<div>
+    <dl>
+        <dt>Account Name:  @Model.AccountName </dt>
+        <dt>Url: @Model.Url</dt>
+        <dt>User Name: @Model.UserName</dt>
+        <dt>Password: @Model.Password</dt>
+        <dt>Account Owner: @Model.AccountOwner</dt>
+    </dl>
+</div>
