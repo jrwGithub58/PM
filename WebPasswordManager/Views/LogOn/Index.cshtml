@@ -1,0 +1,25 @@
+﻿@model WebPasswordManager.Models.LogOn
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title></title>
+</head>
+<body>
+    <div>
+        @using (Html.BeginForm("Index", "LogOn"))
+        {
+        @Html.ValidationSummary()
+        @Html.LabelFor(x => x.Password)
+        @Html.PasswordFor(x => x.Password)
+        <input id="SubmitButton" type="submit" value="Submit" />
+       }
+    </div>
+</body>
+</html>
