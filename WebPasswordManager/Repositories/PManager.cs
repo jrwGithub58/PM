@@ -36,13 +36,11 @@ namespace WebPasswordManager.Repositories
             return accounts;
         }
 
-        public void SaveAccount(string account)
+        public void SaveAccount(PasswordAccount account)
         {
-            var accountToSave = JsonConvert.DeserializeObject<PasswordAccount>(account);
-
-            if(accountToSave.Id == 0)
+            if(account.Id == 0)
             {
-                accountToSave.Id = GetNewAccountId();
+                account.Id = GetNewAccountId();
             }
         }
 

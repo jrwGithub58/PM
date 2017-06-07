@@ -7,9 +7,9 @@ namespace WebPasswordManager.Models
 {
     public class SecurityQuestion
     {
-        int Id { get; set; }
-        string Question { get; set; }
-        string Answer { get; set; }
-        int AccountId { get; set; }
+        public string Question { get; set; }
+        public string Answer { get; set; }
+        public int AccountId { get; set; }
+        public int Id { get; set; }
     }
 }

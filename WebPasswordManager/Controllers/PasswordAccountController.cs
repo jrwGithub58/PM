@@ -53,8 +53,7 @@ namespace WebPasswordManager.Controllers
         [HttpPost]
         public ActionResult SaveAccount(PasswordAccount model)
         {
-            var data = Newtonsoft.Json.JsonConvert.SerializeObject(model).ToString();
-            passwordManager.SaveAccount(data);
+            passwordManager.SaveAccount(model);
             return View("Index");
         }
     }

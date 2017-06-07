@@ -13,6 +13,6 @@ namespace WebPasswordManager.Models
         public string UserName { get; set; }
         public string Password { get; set; }
         public string AccountOwner { get; set; }
-        public List<SecurityQuestion> SecurityQuestions;
+        public List<SecurityQuestion> SecurityQuestions { get; set; } = new List<SecurityQuestion>();
     }
 }

@@ -24,6 +24,7 @@ namespace WebPasswordManager.Controllers
                 return View();
             }
 
+            MvcApplication.Password = model.Password;
             return RedirectToAction("Index", "PasswordAccount");
         }
     }

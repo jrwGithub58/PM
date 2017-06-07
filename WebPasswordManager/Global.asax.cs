@@ -10,11 +10,14 @@ namespace WebPasswordManager
 {
     public class MvcApplication : System.Web.HttpApplication
     {
+        public static string Password = null;
+
         protected void Application_Start()
         {
             AreaRegistration.RegisterAllAreas();
             RouteConfig.RegisterRoutes(RouteTable.Routes);
-            SetSecurityFile("password123");
+            Repositories.SqlitePasswordManager.Init();
+            //SetSecurityFile("password123");
         }
 
         protected void SetSecurityFile(string password)

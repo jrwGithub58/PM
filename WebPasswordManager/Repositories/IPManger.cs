@@ -10,7 +10,7 @@ namespace WebPasswordManager.Repositories
     {
         List<PasswordAccount> GetAllAccounts();
         PasswordAccount GetAccountByID(int id);
-        void SaveAccount(string account);
+        void SaveAccount(PasswordAccount account);
         void DeleteAccount(int id);
     }
 }
