@@ -1,15 +1,10 @@
 ﻿CREATE TABLE PasswordAccount (
     Id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL UNIQUE,
-    AccountNameName TEXT NULL,
+    AccountName TEXT NULL,
     Url TEXT NULL,
     UserName TEXT NULL,
     Password TEXT NULL,
-    AccountOwner TEXT NULL
+    AccountOwner TEXT NULL,
+	SecurityQuestions TEXT NULL
 )
 
-CREATE TABLE PasswordAccount (
-    Id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL UNIQUE,
-    AccountId INTEGER NOT NULL,
-    Question TEXT NULL,
-    Answer TEXT NULL
-)

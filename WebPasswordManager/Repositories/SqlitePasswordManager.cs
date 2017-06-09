@@ -17,9 +17,8 @@ namespace WebPasswordManager.Repositories
             {
                 connection.Open();
                 using (var transaction = connection.BeginTransaction())
-                {
-                    connection.Execute("DELETE FROM SecurityQuestion WHERE AccountId = ?", id);
-                    connection.Execute("DELETE FROM PasswordAccount WHERE Id = ?", id);
+                {                    
+                    connection.Execute("DELETE FROM PasswordAccount WHERE Id = @id", new { id });
                     transaction.Commit();
                 }
             }
@@ -30,11 +29,8 @@ namespace WebPasswordManager.Repositories
             using (var connection = CreateConnection())
             {
                 connection.Open();
-                var passwordAccount = connection.QueryFirst<PasswordAccount>("SELECT * FROM PasswordAccount WHERE Id = ?", id);
-                if (passwordAccount != null)
-                {
-                    passwordAccount.SecurityQuestions = connection.Query<SecurityQuestion>("SELECT * FROM SecurityQuestion WHERE AccountId = ?", id).ToList();
-                }
+                var passwordAccount = connection.QueryFirst<PasswordAccount>("SELECT * FROM PasswordAccount WHERE Id = @id",new { id });
+                
                 return passwordAccount;
             }
         }
@@ -45,11 +41,9 @@ namespace WebPasswordManager.Repositories
             using (var connection = CreateConnection())
             {
                 connection.Open();
-                var passwordAccounts = connection.Query<PasswordAccount>("SELECT * FROM PasswordAccount").ToList();
-                var securityQuestions = connection.Query<SecurityQuestion>("SELECT * FROM SecurityQuestion").ToList().ToLookup(x => x.AccountId);
+                var passwordAccounts = connection.Query<PasswordAccount>("SELECT * FROM PasswordAccount").ToList();                
                 foreach (var account in passwordAccounts)
                 {
-                    account.SecurityQuestions = securityQuestions[account.Id].ToList();
                     result.Add(account);
                 }
             }
@@ -66,30 +60,14 @@ namespace WebPasswordManager.Repositories
                     if (account.Id == 0)
                     {
                         connection.Execute("INSERT INTO PasswordAccount(AccountName, Url, UserName, Password, AccountOwner) VALUES (?,?,?,?,?)",
-                            new { account.AccountName, account.Url, account.UserName, account.Password });
+                            new { account.AccountName, account.Url, account.UserName, account.Password, account.AccountOwner });
                         account.Id = (int)connection.LastInsertRowId;
                     }
                     else
                     {
                         connection.Execute("UPDATE PasswordAccount SET AccountName = ?, Url = ?, UserName = ?, Password = ?, AccountOwner = ? WHERE Id = ?",
-                            new { account.AccountName, account.Url, account.UserName, account.Password, account.Id });
-                    }
-
-                    foreach (var securityQuestion in account.SecurityQuestions)
-                    {
-                        securityQuestion.AccountId = account.Id;
-                        if (securityQuestion.Id == 0)
-                        {
-                            connection.Execute("INSERT INTO SecurityQuestion(AccountId, Question, Answer) VALUES (?,?,?)",
-                                new { securityQuestion.AccountId, securityQuestion.Question, securityQuestion.Answer });
-                            securityQuestion.Id = (int)connection.LastInsertRowId;
-                        }
-                        else
-                        {
-                            connection.Execute("UPDATE SecurityQuestion SET AccountId = ?, Question = ?, Answer = ? WHERE Id = ?",
-                                new { securityQuestion.AccountId, securityQuestion.Question, securityQuestion.Answer, securityQuestion.Id });
-                        }
-                    }
+                            new { account.AccountName, account.Url, account.UserName, account.Password, account.AccountOwner, account.Id });
+                    }                    
                     transaction.Commit();
                 }
             }

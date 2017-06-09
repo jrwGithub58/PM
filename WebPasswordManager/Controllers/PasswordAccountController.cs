@@ -6,9 +6,11 @@ using System.Web.Mvc;
 using WebPasswordManager.Models;
 using WebPasswordManager.Repositories;
 using Newtonsoft.Json;
+using WebPasswordManager.Attributes;
 
 namespace WebPasswordManager.Controllers
 {
+    [PasswordRequired]
     public class PasswordAccountController : Controller
     {
         IPManger passwordManager = new PManager();
@@ -54,7 +56,7 @@ namespace WebPasswordManager.Controllers
         public ActionResult SaveAccount(PasswordAccount model)
         {
             passwordManager.SaveAccount(model);
-            return View("Index");
+            return RedirectToAction("Index", "PasswordAccount");
         }
     }
 }

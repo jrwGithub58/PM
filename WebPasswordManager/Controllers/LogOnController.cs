@@ -25,6 +25,7 @@ namespace WebPasswordManager.Controllers
             }
 
             MvcApplication.Password = model.Password;
+            Repositories.SqlitePasswordManager.Init();
             return RedirectToAction("Index", "PasswordAccount");
         }
     }

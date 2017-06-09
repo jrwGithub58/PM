@@ -3,13 +3,25 @@
 
 }
 
-@Html.ActionLink("Add Account", "AddAccount", "PasswordAccount")<br />
+@Html.ActionLink("Add Account", "AddAccount", "PasswordAccount", null, new { @class = "btn btn-default" })<br /><br />
 <div>
-    @foreach (var account in Model.Accounts)
-    {
-
-        @account.AccountName <span> </span> @Html.ActionLink("View Account", "GetViewAccountById", "PasswordAccount", new { id = account.Id }, null)            <span> </span> @Html.ActionLink("Edit Account", "EditAccount", "PasswordAccount", new { id = account.Id }, null)
-        <span> </span> @Html.ActionLink("Delete Account", "RemoveAccount", "PasswordAccount", new { id = account.Id }, null)<br />
-    }
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Account Name</th>
+                <th>Delete</th>
+            </tr>
+        </thead>
+    <tbody>
+        @foreach (var account in Model.Accounts)
+        {
+            <tr>
+                <td>@Html.ActionLink(account.AccountName, "EditAccount", "PasswordAccount", new { id = account.Id }, null)</td>
+                <td>@Html.ActionLink("Delete Account", "RemoveAccount", "PasswordAccount", new { id = account.Id }, new { @class = "btn btn-default" })</td>
+            </tr>
+        }
+    </tbody>
+</table>
+    
 </div>
 
