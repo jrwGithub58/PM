@@ -9,6 +9,7 @@
         <thead>
             <tr>
                 <th>Account Name</th>
+                <th>URL</th>
                 <th>Delete</th>
             </tr>
         </thead>
@@ -17,6 +18,7 @@
         {
             <tr>
                 <td>@Html.ActionLink(account.AccountName, "EditAccount", "PasswordAccount", new { id = account.Id }, null)</td>
+                <td><a href="@account.Url"></a>@account.Url</td>
                 <td>@Html.ActionLink("Delete Account", "RemoveAccount", "PasswordAccount", new { id = account.Id }, new { @class = "btn btn-default" })</td>
             </tr>
         }

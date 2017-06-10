@@ -59,14 +59,14 @@ namespace WebPasswordManager.Repositories
                 {
                     if (account.Id == 0)
                     {
-                        connection.Execute("INSERT INTO PasswordAccount(AccountName, Url, UserName, Password, AccountOwner) VALUES (?,?,?,?,?)",
-                            new { account.AccountName, account.Url, account.UserName, account.Password, account.AccountOwner });
+                        connection.Execute("INSERT INTO PasswordAccount(AccountName, Url, UserName, Password, AccountOwner, SecurityQuestions) VALUES (?,?,?,?,?,?)",
+                            new { account.AccountName, account.Url, account.UserName, account.Password, account.AccountOwner, account.SecurityQuestions });
                         account.Id = (int)connection.LastInsertRowId;
                     }
                     else
                     {
-                        connection.Execute("UPDATE PasswordAccount SET AccountName = ?, Url = ?, UserName = ?, Password = ?, AccountOwner = ? WHERE Id = ?",
-                            new { account.AccountName, account.Url, account.UserName, account.Password, account.AccountOwner, account.Id });
+                        connection.Execute("UPDATE PasswordAccount SET AccountName = ?, Url = ?, UserName = ?, Password = ?, AccountOwner = ?, SecurityQuestions = ? WHERE Id = ?",
+                            new { account.AccountName, account.Url, account.UserName, account.Password, account.AccountOwner,  account.SecurityQuestions, account.Id });
                     }                    
                     transaction.Commit();
                 }
